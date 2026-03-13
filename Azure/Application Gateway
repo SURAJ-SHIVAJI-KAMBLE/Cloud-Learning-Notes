@@ -1,11 +1,17 @@
-Step 1. Create Resource Group
+Step 1. 
+
+
+Create Resource Group
 In Azure Portal:
 Resource Group : TEST-RG
 Region : East US (or your region)
 
 Everything in the lab is deployed inside this resource group.
 
-Step 2. Create Virtual Network A
+Step 2. 
+
+
+Create Virtual Network A
 Name : VNet-A
 Address space : 10.0.0.0/16
 Subnet : subnet-a
@@ -13,7 +19,10 @@ Subnet range : 10.0.0.0/24
 
 This network will contain VM1.
 
-Step 3. Create Virtual Network B
+Step 3.
+
+
+Create Virtual Network B
 Name : VNet-B
 Address space : 10.1.0.0/16
 Subnet : subnet-b
@@ -25,7 +34,10 @@ VNet address ranges must be different
 
 Otherwise peering will fail.
 
-Step 4. Create Virtual Machine 1
+Step 4.
+
+
+Create Virtual Machine 1
 VM Name : VM1
 OS : Ubuntu
 VNet : VNet-A
@@ -36,32 +48,49 @@ Enable:
 SSH port 22
 HTTP port 80
 
-Step 5. Connect to VM1
+Step 5.
+
+
+Connect to VM1
 From your computer:
 ssh snit@20.80.98.26
 
 Now you are inside the Linux VM.
 
-Step 6. Update Ubuntu Packages
+Step 6. 
+
+
+Update Ubuntu Packages
 sudo apt update
 
 This refreshes the package list.
 
-Step 7. Install Apache Web Server
+Step 7.
+
+
+Install Apache Web Server
 sudo apt install apache2
 
 Apache is the software that runs websites.
 
-Step 8. Enable Apache Service
+Step 8. 
+
+
+Enable Apache Service
 sudo systemctl enable apache2
 
 This makes Apache start automatically when the VM boots.
 
-Step 9. Start Apache
+Step 9.
+
+Start Apache
 sudo systemctl start apache2
 
 
-Step 10. Verify Apache Running
+Step 10. 
+
+
+Verify Apache Running
 sudo systemctl status apache2
 
 Output shows:
@@ -69,7 +98,10 @@ Active: active (running)
 
 Which means the web server is working.
 
-Step 11. Go to Website Folder
+Step 11. 
+
+
+Go to Website Folder
 cd /var/www/html
 
 Check files:
@@ -80,16 +112,25 @@ index.html
 
 This is the default Apache page.
 
-Step 12. Remove Default Page
+Step 12. 
+
+
+Remove Default Page
 sudo rm index.html
 
 Without sudo it fails because the directory belongs to root.
 
-Step 13. Create New Webpage
+Step 13.
+
+
+Create New Webpage
 sudo touch index.html
 
 
-Step 14. Edit Webpage
+Step 14. 
+
+
+Edit Webpage
 sudo vi index.html
 
 Write:
@@ -108,7 +149,10 @@ ESC
 ENTER
 
 
-Step 15. Test Website
+Step 15. 
+
+
+Test Website
 Open browser:
 http://VM1-Public-IP
 
@@ -120,7 +164,10 @@ Welcome to VM1
 Server 1 - VNet A
 
 
-Step 16. Create Virtual Machine 2
+Step 16. 
+
+
+Create Virtual Machine 2
 VM Name : VM2
 VNet : VNet-B
 Subnet : subnet-b
@@ -128,13 +175,19 @@ Private IP : 10.1.0.4
 OS : Ubuntu
 
 
-Step 17. Install Apache on VM2
+Step 17. 
+
+
+Install Apache on VM2
 SSH into VM2 then run:
 sudo apt update
 sudo apt install apache2
 
 
-Step 18. Edit VM2 Webpage
+Step 18. 
+
+
+Edit VM2 Webpage
 cd /var/www/html
 sudo vi index.html
 
@@ -144,7 +197,10 @@ Welcome to VM 2
 
 Save and exit.
 
-Step 19. Create VNet Peering
+Step 19. 
+
+
+Create VNet Peering
 Go to VNet-A
 Peer VNet-A → VNet-B
 
@@ -157,7 +213,10 @@ VNet-A ↔ VNet-B
 Now both networks can communicate privately.
 
 
-Step 20. Create Application Gateway
+Step 20. 
+
+
+Create Application Gateway
 Name : TEST-AppGateway
 VNet : VNet-A
 Subnet : appgw-subnet
@@ -168,14 +227,20 @@ Application Gateway acts as a Layer 7 Load Balancer.
 
 
 
-Step 21. Create HTTP Listener
+Step 21. 
+
+
+Create HTTP Listener
 Protocol : HTTP
 Port : 80
 Frontend IP : Public
 
 Listener waits for incoming web requests.
 
-Step 22. Create Backend Pool
+Step 22. 
+
+
+Create Backend Pool
 Initially you tried:
 Target Type : Virtual Machine
 
@@ -266,7 +331,10 @@ User2 → separate connection → VM
 
 Used for some special authentication apps.
 
-Step 23. Add Backend using IP
+Step 23.
+
+
+Add Backend using IP
 You changed:
 Target Type : IP Address or FQDN (Fully Qualified Domain Name)
 
@@ -277,26 +345,38 @@ Added:
 Now backend pool contains both servers.
 (Because we done peering of both VM so cant use Vm option as it wont appear )
 
-Step 24. Create HTTP Settings
+Step 24. 
+
+
+Create HTTP Settings
 Protocol : HTTP
 Port : 80
 
 This defines how the gateway connects to backend servers.
 
-Step 25. Create Routing Rule
+Step 25. 
+
+
+Create Routing Rule
 Listener → Backend Pool
 This rule sends traffic to:
 VM1
 VM2
 
-Step 26. Allow NSG Rules
+Step 26. 
+
+
+Allow NSG Rules
 Allow traffic:
 Port 80
 Source : Application Gateway
 
 Otherwise requests get blocked.
 
-Step 27. Access Application
+Step 27. 
+
+
+Access Application
 User open browser:
 http://ApplicationGatewayPublicIP
 
@@ -304,7 +384,10 @@ Example:
 http://20.80.98.26
 
 
-Step 28. Final Result
+Step 28.
+
+
+Final Result
 When refreshing the page:
 First response:
 Welcome to VM 1
