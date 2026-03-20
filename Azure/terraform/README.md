@@ -1,150 +1,198 @@
-Terraform Practical Lab
-Create an Azure Resource Group using Terraform and VS Code
+---
 
-Step 1 – Introduction to Terraform
-Terraform is an Infrastructure as Code (IaC) tool developed by HashiCorp.
-Terraform allows us to create and manage cloud infrastructure using code instead of manually creating resources in the portal.
-Terraform supports multiple cloud platforms such as:
-Microsoft Azure
-Amazon Web Services
-Google Cloud
-Examples of resources Terraform can create:
-Virtual Machines
-Storage Accounts
-Networks
-Resource Groups
-Databases
+# 🚀 Terraform Practical Lab
 
-Step 2 – Understanding Azure Resource Structure
-Azure resources follow a hierarchy.
+### Create an Azure Resource Group using Terraform & VS Code
+
+---
+
+## 📌 Step 1 – Introduction to Terraform
+
+Terraform is an **Infrastructure as Code (IaC)** tool developed by HashiCorp.
+
+It allows you to create and manage cloud infrastructure using code instead of manually configuring resources in a portal.
+
+### 🌐 Supported Cloud Platforms
+
+* Microsoft Azure
+* Amazon Web Services (AWS)
+* Google Cloud Platform (GCP)
+
+### ⚙️ Resources Terraform Can Create
+
+* Virtual Machines
+* Storage Accounts
+* Networks
+* Resource Groups
+* Databases
+
+---
+
+## 📌 Step 2 – Understanding Azure Resource Structure
+
+Azure follows a hierarchical structure:
+
+```
 Azure Subscription
         ↓
 Resource Group
         ↓
 Resources (VM, Storage, Network)
+```
 
-Example:
+### 📦 Example
+
+```
 Subscription
    ↓
 Resource Group (Example-RG)
    ↓
 VM / Storage / Network
+```
 
-A Resource Group is like a folder that contains all related resources.
+👉 A **Resource Group** acts like a folder that contains related resources.
 
-Step 3 – Prerequisites
-Before starting this lab, install the following tools.
-Tool
-Purpose
-Visual Studio Code
-Code editor
-Terraform
-Infrastructure as Code tool
-Azure CLI
-Authenticate with Azure
+---
 
+## 📌 Step 3 – Prerequisites
 
-Step 4 – Install Visual Studio Code
-Install Visual Studio Code
-Steps:
-Open browser
-Go to
-https://code.visualstudio.com
+Install the following tools before starting:
 
-Download VS Code for Windows
-Install normally.
-VS Code will be used to write Terraform scripts.
+| Tool               | Purpose                     |
+| ------------------ | --------------------------- |
+| Visual Studio Code | Code Editor                 |
+| Terraform          | Infrastructure as Code Tool |
+| Azure CLI          | Azure Authentication        |
 
-Step 5 – Install Terraform
-Download Terraform
-Open browser
-Go to
-https://developer.hashicorp.com/terraform/downloads
+---
 
-Download:
-Windows AMD64
+## 📌 Step 4 – Install Visual Studio Code
+
+1. Open browser
+2. Go to: [https://code.visualstudio.com](https://code.visualstudio.com)
+3. Download **VS Code for Windows**
+4. Install normally
+
+---
+
+## 📌 Step 5 – Install Terraform
+
+1. Go to: [https://developer.hashicorp.com/terraform/downloads](https://developer.hashicorp.com/terraform/downloads)
+2. Download: **Windows AMD64**
 
 Example file:
+
+```
 terraform_1.x.x_windows_amd64.zip
+```
 
+---
 
-Step 6 – Extract Terraform
-Go to Downloads
-Right click the ZIP file
-Click Extract All
-After extraction you will see:
+## 📌 Step 6 – Extract Terraform
+
+1. Go to **Downloads**
+2. Right-click ZIP file → **Extract All**
+3. After extraction, you will see:
+
+```
 terraform.exe
+```
 
+---
 
-Step 7 – Create Terraform Folder
-Create a folder in C drive.
+## 📌 Step 7 – Create Terraform Folder
+
+Create a folder:
+
+```
 C:\Terraform
+```
 
-Move the file:
+Move:
+
+```
 terraform.exe
+```
 
-into this folder.
-Final location:
+Final structure:
+
+```
 C:\Terraform\terraform.exe
+```
 
+---
 
-Step 8 – Add Terraform to Environment Variables
-This allows Terraform to run from any terminal.
-Steps:
-Press Windows key
-Search
-Environment Variables
+## 📌 Step 8 – Add Terraform to Environment Variables
 
-Click
-Edit the system environment variables
+1. Press **Windows Key**
+2. Search: `Environment Variables`
+3. Click: **Edit the system environment variables**
+4. Click **Environment Variables**
+5. Under **System Variables → Path → Edit → New**
+6. Add:
 
-Click Environment Variables
-Under System Variables → Path
-Click Edit → New
-Add:
+```
 C:\Terraform
+```
 
-Click OK
+7. Click **OK**
 
-Step 9 – Verify Terraform Installation
-Open Command Prompt.
-Run:
+---
+
+## 📌 Step 9 – Verify Terraform Installation
+
+Open Command Prompt and run:
+
+```bash
 terraform -version
+```
 
-Example output:
+✅ Example Output:
+
+```
 Terraform v1.x.x
+```
 
-If you see the version → Terraform is installed successfully.
+---
 
-Step 10 – Install Azure CLI
-Install Azure CLI
+## 📌 Step 10 – Install Azure CLI
+
 Download from:
-https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+[https://learn.microsoft.com/en-us/cli/azure/install-azure-cli](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 
-Verify installation:
+Verify:
+
+```bash
 az --version
+```
 
+---
 
-Step 11 – Open VS Code
-Open Visual Studio Code
-Click
-File → Open Folder
+## 📌 Step 11 – Open VS Code
 
-Create a new folder
-Example:
+1. Open VS Code
+2. Click: **File → Open Folder**
+3. Create folder:
+
+```
 C:\Users\User\terraform-project
+```
 
+---
 
-Step 12 – Create Terraform File
+## 📌 Step 12 – Create Terraform File
+
 Inside the project folder:
-Click New File
-Name the file
-main.tf
 
-.tf means Terraform configuration file.
+* Create new file → `main.tf`
 
-Step 13 – Write Terraform Provider Code
-Paste the following code inside main.tf
+👉 `.tf` = Terraform configuration file
+
+---
+
+## 📌 Step 13 – Add Provider Configuration
+
+```hcl
 terraform {
   required_providers {
     azurerm = {
@@ -157,92 +205,127 @@ terraform {
 provider "azurerm" {
   features {}
 }
+```
 
-Save the file.
+---
 
-Step 14 – Open Terminal in VS Code
-Click:
+## 📌 Step 14 – Open Terminal in VS Code
+
+```
 Terminal → New Terminal
-
-Terminal will open like:
-PS C:\Users\User\terraform-project>
-
-
-Step 15 – Find Tenant ID in Azure Portal
-Open Microsoft Azure Portal
-Steps:
-Go to
-https://portal.azure.com
-
-Search
-Microsoft Entra ID
-
-Click Overview
-Copy the Tenant ID
-
-
-
-Step 16 – Login to Azure
-In the terminal run:
-az login --tenant <tenant-id>
+```
 
 Example:
+
+```
+PS C:\Users\User\terraform-project>
+```
+
+---
+
+## 📌 Step 15 – Get Tenant ID from Azure
+
+1. Open: [https://portal.azure.com](https://portal.azure.com)
+2. Search: **Microsoft Entra ID**
+3. Click **Overview**
+4. Copy **Tenant ID**
+
+---
+
+## 📌 Step 16 – Login to Azure
+
+```bash
+az login --tenant <tenant-id>
+```
+
+Example:
+
+```bash
 az login --tenant acc0c915-b8fb-47d4-aaa0-c1d689b552e5
+```
 
-A browser window will open.
-Login with your Azure account.
+---
 
-Step 17 – Add Resource Group Code
-Add this code inside main.tf
+## 📌 Step 17 – Add Resource Group Code
+
+```hcl
 resource "azurerm_resource_group" "example" {
   name     = "rg-terraform-demo"
   location = "Central India"
 }
+```
 
-Save the file.
+---
 
-Step 18 – Initialize Terraform
-Run:
+## 📌 Step 18 – Initialize Terraform
+
+```bash
 terraform init
+```
 
-Expected message:
+✅ Output:
+
+```
 Terraform has been successfully initialized
+```
 
+---
 
-Step 19 – Check Terraform Plan
-Run:
+## 📌 Step 19 – Check Execution Plan
+
+```bash
 terraform plan
+```
 
-This shows what resources Terraform will create.
+👉 Shows what Terraform will create
 
-Step 20 – Deploy Infrastructure
-Run:
+---
+
+## 📌 Step 20 – Apply Configuration
+
+```bash
 terraform apply
+```
 
 Type:
+
+```
 yes
+```
 
-Terraform will create the resource.
+---
 
-Step 21 – Verify in Azure Portal
-Open Azure Portal.
-Search:
-Resource Groups
+## 📌 Step 21 – Verify in Azure Portal
 
-You will see:
+1. Open Azure Portal
+2. Search: **Resource Groups**
+3. Verify:
+
+```
 rg-terraform-demo
+```
 
-created successfully.
+✅ Successfully created
 
-Step 22 – Destroy Resources (Optional)
-To delete the resource run:
+---
+
+## 📌 Step 22 – Destroy Resources (Optional)
+
+```bash
 terraform destroy
+```
 
 Type:
+
+```
 yes
+```
 
+---
 
-Terraform Workflow Summary
+# 🔁 Terraform Workflow Summary
+
+```
 Install Terraform
         ↓
 Add Terraform Path
@@ -258,7 +341,14 @@ terraform init
 terraform plan
         ↓
 terraform apply
+```
 
+---
 
+# 🎯 Final Outcome
 
+✅ Azure Resource Group created using Terraform
+✅ Hands-on with IaC (Infrastructure as Code)
+✅ Ready for next level (VM, VNet, Storage)
 
+---
