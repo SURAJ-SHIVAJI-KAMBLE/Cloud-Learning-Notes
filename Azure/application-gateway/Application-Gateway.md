@@ -1,436 +1,474 @@
-Step 1. 
+---
 
+# 🚀 Azure Application Gateway Practical Lab
 
-Create Resource Group
-In Azure Portal:
-Resource Group : TEST-RG
-Region : East US (or your region)
+### Multi-VNet Load Balancing with VM1 & VM2
 
-Everything in the lab is deployed inside this resource group.
+---
 
-Step 2. 
+## 📌 Step 1 – Create Resource Group
 
+Create a Resource Group in Azure Portal:
 
-Create Virtual Network A
-Name : VNet-A
-Address space : 10.0.0.0/16
-Subnet : subnet-a
-Subnet range : 10.0.0.0/24
+* **Name:** `TEST-RG`
+* **Region:** `East US` (or your region)
 
-This network will contain VM1.
+👉 All resources in this lab will be deployed inside this Resource Group.
 
-Step 3.
+---
 
+## 📌 Step 2 – Create Virtual Network A
 
-Create Virtual Network B
-Name : VNet-B
-Address space : 10.1.0.0/16
-Subnet : subnet-b
-Subnet range : 10.1.0.0/24
+* **Name:** `VNet-A`
+* **Address Space:** `10.0.0.0/16`
 
-This network will contain VM2.
-Important rule:
-VNet address ranges must be different
+### Subnet:
 
-Otherwise peering will fail.
+* **Name:** `subnet-a`
+* **Range:** `10.0.0.0/24`
 
-Step 4.
+👉 This VNet will host **VM1**
 
+---
 
-Create Virtual Machine 1
-VM Name : VM1
-OS : Ubuntu
-VNet : VNet-A
-Subnet : subnet-a
-Private IP : 10.0.0.4
+## 📌 Step 3 – Create Virtual Network B
 
-Enable:
-SSH port 22
-HTTP port 80
+* **Name:** `VNet-B`
+* **Address Space:** `10.1.0.0/16`
 
-Step 5.
+### Subnet:
 
+* **Name:** `subnet-b`
+* **Range:** `10.1.0.0/24`
 
-Connect to VM1
-From your computer:
+👉 This VNet will host **VM2**
+
+⚠️ **Important Rule:**
+VNet address spaces must be different, otherwise **peering will fail**.
+
+---
+
+## 📌 Step 4 – Create Virtual Machine 1
+
+* **VM Name:** `VM1`
+* **OS:** Ubuntu
+* **VNet:** `VNet-A`
+* **Subnet:** `subnet-a`
+* **Private IP:** `10.0.0.4`
+
+### Enable Ports:
+
+* SSH → `22`
+* HTTP → `80`
+
+---
+
+## 📌 Step 5 – Connect to VM1
+
+```bash
 ssh snit@20.80.98.26
+```
 
-Now you are inside the Linux VM.
+👉 You are now inside the Linux VM.
 
-Step 6. 
+---
 
+## 📌 Step 6 – Update Packages
 
-Update Ubuntu Packages
+```bash
 sudo apt update
+```
 
-This refreshes the package list.
+👉 Refreshes package list.
 
-Step 7.
+---
 
+## 📌 Step 7 – Install Apache
 
-Install Apache Web Server
+```bash
 sudo apt install apache2
+```
 
-Apache is the software that runs websites.
+👉 Apache is used to host websites.
 
-Step 8. 
+---
 
+## 📌 Step 8 – Enable Apache
 
-Enable Apache Service
+```bash
 sudo systemctl enable apache2
+```
 
-This makes Apache start automatically when the VM boots.
+---
 
-Step 9.
+## 📌 Step 9 – Start Apache
 
-Start Apache
+```bash
 sudo systemctl start apache2
+```
 
+---
 
-Step 10. 
+## 📌 Step 10 – Verify Apache
 
-
-Verify Apache Running
+```bash
 sudo systemctl status apache2
+```
 
-Output shows:
+✅ Output:
+
+```
 Active: active (running)
+```
 
-Which means the web server is working.
+---
 
-Step 11. 
+## 📌 Step 11 – Navigate to Web Folder
 
-
-Go to Website Folder
+```bash
 cd /var/www/html
-
-Check files:
 ls
+```
 
-Output:
+👉 Default file:
+
+```
 index.html
+```
 
-This is the default Apache page.
+---
 
-Step 12. 
+## 📌 Step 12 – Remove Default Page
 
-
-Remove Default Page
+```bash
 sudo rm index.html
+```
 
-Without sudo it fails because the directory belongs to root.
+---
 
-Step 13.
+## 📌 Step 13 – Create New Page
 
-
-Create New Webpage
+```bash
 sudo touch index.html
+```
 
+---
 
-Step 14. 
+## 📌 Step 14 – Edit Webpage
 
-
-Edit Webpage
+```bash
 sudo vi index.html
+```
 
-Write:
+### Add content:
 
+```
 Welcome to VM1
-
-  Server 1 - VNet A
-
-Press ESC button then shift + ; 
-Then wq 
-Enter
-
-Save in vi:
-ESC
-:wq
-ENTER
-
-
-Step 15. 
-
-
-Test Website
-Open browser:
-http://VM1-Public-IP
-
-Example:
-http://20.80.98.26
-
-Page shows:
-Welcome to VM1 
 Server 1 - VNet A
+```
 
+Save:
 
-Step 16. 
+```
+ESC → :wq → ENTER
+```
 
+---
 
-Create Virtual Machine 2
-VM Name : VM2
-VNet : VNet-B
-Subnet : subnet-b
-Private IP : 10.1.0.4
-OS : Ubuntu
+## 📌 Step 15 – Test Website
 
+Open browser:
 
-Step 17. 
+```
+http://20.80.98.26
+```
 
+✅ Output:
 
-Install Apache on VM2
-SSH into VM2 then run:
+```
+Welcome to VM1
+Server 1 - VNet A
+```
+
+---
+
+## 📌 Step 16 – Create Virtual Machine 2
+
+* **VM Name:** `VM2`
+* **OS:** Ubuntu
+* **VNet:** `VNet-B`
+* **Subnet:** `subnet-b`
+* **Private IP:** `10.1.0.4`
+
+---
+
+## 📌 Step 17 – Install Apache on VM2
+
+```bash
 sudo apt update
 sudo apt install apache2
+```
 
+---
 
-Step 18. 
+## 📌 Step 18 – Edit VM2 Webpage
 
-
-Edit VM2 Webpage
+```bash
 cd /var/www/html
 sudo vi index.html
+```
 
-Write:
+### Add:
+
+```
 Welcome to VM 2
- Server 2 - VNet B
+Server 2 - VNet B
+```
 
-Save and exit.
+---
 
-Step 19. 
+## 📌 Step 19 – Create VNet Peering
 
+### From VNet-A:
 
-Create VNet Peering
-Go to VNet-A
-Peer VNet-A → VNet-B
+```
+Peer → VNet-A → VNet-B
+```
 
-Then from VNet-B
-Peer VNet-B → VNet-A
+### From VNet-B:
 
-Result:
+```
+Peer → VNet-B → VNet-A
+```
+
+✅ Result:
+
+```
 VNet-A ↔ VNet-B
+```
 
-Now both networks can communicate privately.
+👉 Both networks can now communicate privately.
 
+---
 
-Step 20. 
+## 📌 Step 20 – Create Application Gateway
 
+* **Name:** `TEST-AppGateway`
+* **VNet:** `VNet-A`
+* **Subnet:** `appgw-subnet`
+* **Frontend:** Public IP
+* **Port:** `80`
 
-Create Application Gateway
-Name : TEST-AppGateway
-VNet : VNet-A
-Subnet : appgw-subnet
-Frontend : Public IP
-Frontend Port : 80
+👉 Application Gateway = **Layer 7 Load Balancer**
 
-Application Gateway acts as a Layer 7 Load Balancer.
+---
 
+## 📌 Step 21 – Create HTTP Listener
 
+* **Protocol:** HTTP
+* **Port:** 80
+* **Frontend IP:** Public
 
-Step 21. 
+👉 Listens for incoming traffic.
 
+---
 
-Create HTTP Listener
-Protocol : HTTP
-Port : 80
-Frontend IP : Public
+## 📌 Step 22 – Backend Pool Issue (Important Concept)
 
-Listener waits for incoming web requests.
+Initially:
 
-Step 22. 
+* Target Type → Virtual Machine
+* Only **VM1 appeared**
 
+### ❗ Reason:
 
-Create Backend Pool
-Initially you tried:
-Target Type : Virtual Machine
-
-But only VM1 appeared.
-Reason:
-Application Gateway only detects VMs in the same VNet
+Application Gateway detects only VMs in **same VNet**
 
 Your setup:
+
+```
 VM1 → VNet-A
 VM2 → VNet-B
 App Gateway → VNet-A
+```
 
-So VM2 didn't show.
+👉 So VM2 is not visible
 
-So 
-1.what is Cookie based Affinity?
-2.connection draining ?
-3.Dedicated Backend connection?
+---
 
-You found three settings that sound fancy but are actually simple. Let’s keep it short and human-friendly.
+## 📌 Step 23 – Add Backend Using IP
 
-1. Cookie-Based Affinity
-Meaning:
-Keeps a user connected to the same server every time.
-Example
-Without affinity:
-User → VM1
-Next request → VM2
-Next request → VM1
+Change:
 
-With affinity enabled:
-User → VM1
-Next request → VM1
-Next request → VM1
+```
+Target Type → IP Address or FQDN
+```
 
-Used for: login sessions, shopping carts.
+Add:
 
-2. Connection Draining
-When a server needs to be removed or updated, the gateway stops sending new users to it, but existing users continue until they finish.
-Your setting:
-Connection Draining: Enabled
-Drain timeout: 1200 seconds (20 minutes)
-So the gateway gives users time to finish their requests.
+```
+10.0.0.4 (VM1)
+10.1.0.4 (VM2)
+```
 
-Uber- Example
-Imagine a ride booking app like an Uber-type system.
-Users are connected to VM1.
-Total users connected to VM1 = 50
+✅ Now both VMs are part of backend pool
 
-Now the system admin wants to remove VM1 for maintenance.
-Without connection draining:
-50 users suddenly disconnected
-Ride requests fail
-Users angry
+---
 
-Not great for business.
+## 📌 Step 24 – Create HTTP Settings
 
-With Connection Draining Enabled
-Application Gateway behavior:
-VM1 is marked for removal.
-Gateway stops sending new users to VM1.
-Existing users continue.
-Example:
-Total users = 50
-5 users finish their ride request
-45 users still active
+* **Protocol:** HTTP
+* **Port:** 80
 
-Flow becomes:
-Old users → continue on VM1
-New users → redirected to VM2
+👉 Defines how gateway talks to backend
 
-After some time:
-45 → 30 → 10 → 0 users
+---
 
-Once users finish, VM1 can safely be removed.
+## 📌 Step 25 – Create Routing Rule
 
-3. Dedicated Backend Connection
-Meaning:
-Each user gets their own connection to the server.
-Example
-Disabled:
-User1 → shared connection → VM
-User2 → shared connection → VM
-
-Enabled:
-User1 → separate connection → VM
-User2 → separate connection → VM
-
-Used for some special authentication apps.
-
-Step 23.
-
-
-Add Backend using IP
-You changed:
-Target Type : IP Address or FQDN (Fully Qualified Domain Name)
-
-Added:
-10.0.0.4  (VM1)
-10.1.0.4  (VM2)
-
-Now backend pool contains both servers.
-(Because we done peering of both VM so cant use Vm option as it wont appear )
-
-Step 24. 
-
-
-Create HTTP Settings
-Protocol : HTTP
-Port : 80
-
-This defines how the gateway connects to backend servers.
-
-Step 25. 
-
-
-Create Routing Rule
+```
 Listener → Backend Pool
-This rule sends traffic to:
-VM1
-VM2
+```
 
-Step 26. 
+👉 Routes traffic to:
 
+* VM1
+* VM2
 
-Allow NSG Rules
-Allow traffic:
-Port 80
-Source : Application Gateway
+---
 
-Otherwise requests get blocked.
+## 📌 Step 26 – Configure NSG Rules
 
-Step 27. 
+Allow:
 
+* **Port:** 80
+* **Source:** Application Gateway
 
-Access Application
-User open browser:
-http://ApplicationGatewayPublicIP
+👉 Otherwise traffic will be blocked
 
-Example:
-http://20.80.98.26
+---
 
+## 📌 Step 27 – Access Application
 
-Step 28.
+Open browser:
 
+```
+http://<Application-Gateway-Public-IP>
+```
 
-Final Result
-When refreshing the page:
-First response:
-Welcome to VM 1
-Server 1 - VNet A
+---
 
-Refresh again:
-Welcome to VM 2
-Server 2 - VNet B
+## 📌 Step 28 – Final Result
 
-Traffic is switching between both servers.
+On refresh:
 
-    Final Architecture
-       User Browser
-            ↓
-       Internet
-            ↓
+```
+VM1 → Welcome to VM1
+VM2 → Welcome to VM2
+```
+
+👉 Traffic alternates between servers (Load Balancing)
+
+---
+
+# ⚙️ Important Concepts (Interview + Real World)
+
+## 🍪 Cookie-Based Affinity
+
+👉 Keeps user connected to same server
+
+### Without Affinity:
+
+```
+User → VM1 → VM2 → VM1
+```
+
+### With Affinity:
+
+```
+User → VM1 → VM1 → VM1
+```
+
+📌 Used for:
+
+* Login sessions
+* Shopping carts
+
+---
+
+## 🔄 Connection Draining
+
+👉 Allows existing users to finish before removing server
+
+### Example:
+
+* Total users on VM1 = 50
+
+With draining:
+
+```
+New users → VM2
+Old users → continue on VM1
+```
+
+Gradually:
+
+```
+50 → 30 → 10 → 0
+```
+
+📌 Your Config:
+
+* Enabled
+* Timeout: `1200 sec (20 mins)`
+
+---
+
+## 🔌 Dedicated Backend Connection
+
+👉 Each user gets separate connection
+
+### Disabled:
+
+```
+Users share connection
+```
+
+### Enabled:
+
+```
+Each user → separate connection
+```
+
+📌 Used for:
+
+* Special authentication apps
+
+---
+
+# 🏗️ Final Architecture
+
+```id="arch1"
+User Browser
+      ↓
+   Internet
+      ↓
 Application Gateway
-            ↓
-   Backend Pool
-       ↙        ↘
-  VM1             VM2
-VNet-A            VNet-B
-           ↔
-     VNet Peering
+      ↓
+Backend Pool
+   ↙       ↘
+ VM1       VM2
+VNet-A   VNet-B
+     ↔ VNet Peering
+```
 
+---
 
+# 🎯 Final Outcome
 
+✅ Multi-VNet architecture
+✅ VNet Peering configured
+✅ Application Gateway Load Balancing
+✅ Real-world production-like setup
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+---
