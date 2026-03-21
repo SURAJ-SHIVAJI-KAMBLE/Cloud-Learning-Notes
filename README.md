@@ -1,5 +1,7 @@
 # Cloud Learning Notes
 
+![Architecture](./images/architecture.png)
+
 This repository contains my practical learning and documentation for:
 
 - Microsoft Azure
