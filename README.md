@@ -16,5 +16,9 @@ This repository contains my practical learning and documentation for:
 - EC2 Setup
 - S3 Storage
 
+![AWS](https://img.shields.io/badge/AWS-Practice-orange)
+![Terraform](https://img.shields.io/badge/Terraform-IaC-blue)
+![Status](https://img.shields.io/badge/Status-Active-success)
+
 ## Terraform
 - Deploy Azure VM using Terraform
