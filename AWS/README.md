@@ -1,5 +1,13 @@
-AWS Consists All below
-- Practicals Notes
-- Projects
-- Interview Questions 
-- 
+# ☁️ AWS Learning Notes
+
+## 📂 Contents
+
+- 📘 Practicals Notes
+- 🚀 Projects
+- ❓ Interview Questions
+
+---
+
+👉 Go to Practicals:
+
+- [AWS Practicals](./Practicals/README.md)
