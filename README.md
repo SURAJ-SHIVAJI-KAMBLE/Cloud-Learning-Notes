@@ -7,23 +7,29 @@
 ---
 
 ## 📌 Overview
-This repository contains AWS & Azure practical implementations...
 
-- Microsoft Azure
-- AWS
-- Terraform
-- DevOps Tools
+> 🚀 Hands-on cloud & DevOps learning with real-world problem solving and troubleshooting.
 
-## Azure Labs
-- Application Gateway Setup
-- Virtual Machine Deployment
-- Virtual Network Configuration
+This repository contains AWS & Azure practical implementations.
 
-## AWS Labs
-- EC2 Setup
-- S3 Storage
+---
 
+## ☁️ Azure Labs
 
+- [Application Gateway Setup](./Azure/application-gateway/Application-Gateway.md)
+- [Azure Bastion](./Azure/azure-bastion/azure-bastion.md)
+- [Terraform](./Azure/terraform/Terraform.md)
 
-## Terraform
-- Deploy Azure VM using Terraform
+---
+
+## ☁️ AWS Labs
+
+- [EC2 Setup](./AWS/Practicals/01-(EC2%20+%20AMI%20+%20EBS%20+%20Snapshot).md)
+- [Jenkins](./AWS/Practicals/02-jenkins%20installation%20→%20First%20Jenkins%20job%20→%20Issues%20&%20fixes.md)
+- [Application Load Balancer](./AWS/Practicals/03-Application%20Load%20Balancer.md)
+
+---
+
+## ⚙️ Terraform
+
+- [Deploy Azure VM using Terraform](./Azure/terraform/Terraform.md)
