@@ -9,10 +9,6 @@
 ## 📌 Overview
 This repository contains AWS & Azure practical implementations...
 
-# Cloud Learning Notes
-
-This repository contains my practical learning and documentation for:
-
 - Microsoft Azure
 - AWS
 - Terraform
