@@ -3,8 +3,6 @@
 
 welcome 
 
-</details>
-
 # Cloud Learning Notes
 
 ![Architecture](./images/architecture.png)
@@ -34,17 +32,13 @@ This repository contains my practical learning and documentation for:
 - [Setup](#setup)
 - [Architecture](#architecture)
 
-<details>
-<summary>Click to Expand</summary>
-
-Steps here...
-
-</details>
 
   ```bash
 sudo systemctl start httpd
 
-</details>
+
 
 ## Terraform
 - Deploy Azure VM using Terraform
+
+  </details>
