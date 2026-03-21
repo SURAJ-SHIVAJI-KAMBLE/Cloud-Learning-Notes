@@ -17,5 +17,9 @@ This folder contains Azure practical documentation such as:
 * **Application Gateway** → Load balancing & routing in Azure
 * **Azure Bastion** → Secure connection to VM without public IP
 * **Terraform** → Infrastructure as Code for Azure resources
-
+  
+## 🚀 Future Additions
+- Azure Load Balancer
+- Azure Virtual Network (VNet)
+- Azure Kubernetes Service (AKS)
 ---
