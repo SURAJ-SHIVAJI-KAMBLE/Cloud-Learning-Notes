@@ -24,6 +24,10 @@ This repository contains my practical learning and documentation for:
 - [Overview](#overview)
 - [Setup](#setup)
 - [Architecture](#architecture)
-  
+
+
+  ```bash
+sudo systemctl start httpd
+
 ## Terraform
 - Deploy Azure VM using Terraform
