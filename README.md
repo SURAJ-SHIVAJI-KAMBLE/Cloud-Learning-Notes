@@ -20,5 +20,10 @@ This repository contains my practical learning and documentation for:
 ![Terraform](https://img.shields.io/badge/Terraform-IaC-blue)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
+## 📑 Table of Contents
+- [Overview](#overview)
+- [Setup](#setup)
+- [Architecture](#architecture)
+  
 ## Terraform
 - Deploy Azure VM using Terraform
