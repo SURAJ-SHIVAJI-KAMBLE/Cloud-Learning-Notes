@@ -27,6 +27,12 @@ This repository contains my practical learning and documentation for:
 - [Setup](#setup)
 - [Architecture](#architecture)
 
+<details>
+<summary>Click to Expand</summary>
+
+Steps here...
+
+</details>
 
   ```bash
 sudo systemctl start httpd
