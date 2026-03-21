@@ -1,3 +1,10 @@
+<details>
+<summary>Click to Expand</summary>
+
+Steps here...
+
+</details>
+
 # Cloud Learning Notes
 
 ![Architecture](./images/architecture.png)
@@ -36,6 +43,8 @@ Steps here...
 
   ```bash
 sudo systemctl start httpd
+
+</details>
 
 ## Terraform
 - Deploy Azure VM using Terraform
