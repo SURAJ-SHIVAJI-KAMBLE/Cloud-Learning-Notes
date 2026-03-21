@@ -59,7 +59,7 @@ Click **Next**
 
 #### 🔴 Issue Faced:
 
-Did not understand how to add EC2 instances
+Confusion while adding EC2 instances
 
 #### ✅ Solution:
 
@@ -72,21 +72,31 @@ Did not understand how to add EC2 instances
 ### 🔹 Step 4: Create Application Load Balancer (ALB)
 
 Go to:
-EC2 → Load Balancers → Create Load Balancer
+EC2 → Load Balancers → Create Load Balancer → Application Load Balancer
 
-Select:
+#### Fill Basic Details:
 
-* Application Load Balancer
-* Internet-facing
-
-Fill:
-
-* Listener: HTTP (80)
-* Select your target group
+* Name: my-alb
+* Scheme: Internet-facing
+* IP type: IPv4
 
 ---
 
-### 🔹 Step 5: Create Security Group (During ALB creation)
+### 🔹 Network Mapping (IMPORTANT)
+
+* Select your VPC
+* Select **at least 2 Availability Zones**
+
+Example:
+
+* ap-south-1a ✅
+* ap-south-1b ✅
+
+👉 Subnets will be auto-selected
+
+---
+
+### 🔹 Security Group (IMPORTANT)
 
 #### 🔴 Issue:
 
@@ -94,21 +104,39 @@ Initially selected default security group
 
 #### ✅ Fix:
 
-Create new security group with:
+* Select the security group you created:
 
-* Type: HTTP
-* Port: 80
-* Source: 0.0.0.0/0
+  * `my-alb-sg`
+* This should allow:
 
-Then attach this security group to ALB
+  * HTTP (Port 80)
 
 ---
 
-### 🔹 Step 6: 504 Gateway Timeout Error
+### 🔹 Listener and Routing (VERY IMPORTANT)
+
+* Listener: HTTP (Port 80)
+
+👉 In **Default action dropdown**:
+
+* Select your target group:
+
+  * `my-tg`
+
+---
+
+### 🔹 Final Step
+
+* Scroll down
+* Click **Create Load Balancer**
+
+---
+
+### 🔹 Step 5: 504 Gateway Timeout Error
 
 After opening ALB DNS:
 
-```bash
+```
 504 Gateway Time-out
 ```
 
@@ -116,13 +144,13 @@ After opening ALB DNS:
 
 ## 🔍 Root Cause
 
-* Target group showed: Unhealthy
+* Target group status: Unhealthy
 * Error: Request timed out
-* ALB could not reach EC2 instances
+* ALB was not able to reach EC2
 
 ---
 
-## ✅ Step 7: Fix EC2 Security Group (MAIN FIX)
+## ✅ Step 6: Fix EC2 Security Group (MAIN FIX)
 
 Go to:
 EC2 → Instances → Select each instance → Security → Edit inbound rules
@@ -135,15 +163,15 @@ Add:
 
 ---
 
-## 🔧 Additional Verification
+## 🔧 Verification Commands
 
-### Check Apache status:
+### Check Apache:
 
 ```bash
 sudo systemctl status httpd
 ```
 
-### Start Apache if needed:
+### Start Apache:
 
 ```bash
 sudo systemctl start httpd
@@ -159,14 +187,12 @@ curl localhost
 
 ## 🎯 Final Result
 
-After fix:
-
 * Target group → Healthy
 * ALB working successfully
 
 Output:
 
-```bash
+```
 Hello from Server 1
 Hello from Server 2
 ```
@@ -177,14 +203,15 @@ Hello from Server 2
 
 * ALB → Target Group → EC2 flow
 * Importance of Security Groups
+* Availability Zones concept
 * Debugging 504 Gateway Timeout
-* Health checks concept
+* Health checks
 
 ---
 
 ## 🔥 Interview Answer
 
-"I configured an AWS Application Load Balancer with two EC2 instances. I faced a 504 Gateway Timeout issue due to blocked HTTP traffic in the EC2 security group. I resolved it by allowing port 80, which made the instances healthy and restored load balancing."
+"I configured an AWS Application Load Balancer with two EC2 instances across multiple availability zones. I faced a 504 Gateway Timeout due to blocked HTTP traffic in EC2 security groups and resolved it by allowing port 80."
 
 ---
 
@@ -193,5 +220,5 @@ Hello from Server 2
 This project helped in understanding:
 
 * Load balancing in AWS
-* Networking flow
+* Networking and security
 * Real-world troubleshooting
