@@ -264,7 +264,7 @@ Jenkins → Nodes → Built-In Node → Bring Online
 ```
 Disk space below threshold
 ```
-
+sudo mount -o remount,size=2G /tmp
 **Fix:**
 
 ```
