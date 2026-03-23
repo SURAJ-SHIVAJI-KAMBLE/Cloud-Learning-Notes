@@ -2,6 +2,10 @@
 
 ---
 
+[![AWS](https://img.shields.io/badge/AWS-Active-orange)](AWS/)
+[![Azure](https://img.shields.io/badge/Azure-Active-blue)](Azure/)
+[![Terraform](https://img.shields.io/badge/Terraform-Active-purple)](Azure/terraform)
+
 ## ☁️ Azure Labs
 
 - [Application Gateway Setup](Azure/application-gateway)
