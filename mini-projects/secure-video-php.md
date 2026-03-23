@@ -50,7 +50,7 @@ if (!isset($response['authorizationToken'])) {
     exit;
 }
 
-$apiUrl   = $response['apiUrl'];
+$apiUrl    = $response['apiUrl'];
 $authToken = $response['authorizationToken'];
 
 // ==========================================
