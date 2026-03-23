@@ -91,7 +91,4 @@ $secureUrl = "https://f005.backblazeb2.com/file/$bucketName/$fileName?Authorizat
 header("Location: $secureUrl");
 exit;
 
-“Implemented secure video streaming using Backblaze B2 with time-limited token-based access via PHP (similar to AWS S3 signed URLs)”
-
-
 ?>
