@@ -166,7 +166,9 @@ az --version
 
 If az --version is not recognized, add Azure CLI to PATH manually:
 
+```
 C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin
+```
 
 Then:
 
