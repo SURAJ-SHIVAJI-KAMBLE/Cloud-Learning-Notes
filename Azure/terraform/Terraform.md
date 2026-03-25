@@ -165,7 +165,8 @@ Verify:
 ```bash
 az --version
 ```
-
+ADD to Path If Az --version Not working 
+C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin
 ---
 
 ## 📌 Step 11 – Open VS Code
