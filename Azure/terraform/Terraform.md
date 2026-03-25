@@ -158,16 +158,21 @@ Terraform v1.x.x
 ## 📌 Step 10 – Install Azure CLI
 
 Download from:
-[https://learn.microsoft.com/en-us/cli/azure/install-azure-cli](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
 
-Verify:
-
-```bash
+🔍 Verify Installation
 az --version
-```
-ADD to Path If Az --version Not working
+⚠️ Troubleshooting (Only if command fails)
+
+If az --version is not recognized, add Azure CLI to PATH manually:
 
 C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin
+
+Then:
+
+Restart terminal / VS Code
+Run again:
+az --version
 
 ---
 
