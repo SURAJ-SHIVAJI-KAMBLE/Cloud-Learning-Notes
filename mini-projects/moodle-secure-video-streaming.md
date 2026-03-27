@@ -1,121 +1,133 @@
-### 📹 Video Upload & Integration Guide (Backblaze + Moodle)
 
 ---
 
-## 🔹 Step 1: Upload Video to Backblaze
+```md
+# 📹 LMS Secure Video Delivery System (Moodle + Backblaze B2)
 
-1. Login to Backblaze B2 account
-2. Go to **Buckets**
-3. Open bucket: `moodle-secure-videos`
-4. Click **Upload File**
-5. Select your video (example: `03-routing-basics.mp4`)
-6. Wait for upload to complete
+## 🚀 Project Overview
+This project implements a **secure and scalable video delivery system** for a Learning Management System (Moodle) using **Backblaze B2 cloud storage** and a custom **PHP middleware**.
 
-✅ Make sure:
-
-* File name has **no spaces** (use `-` instead)
-* Example: `03-routing-basics.mp4`
+The goal is to deliver video content securely without exposing direct storage URLs, ensuring **controlled access and improved performance**.
 
 ---
 
-## 🔹 Step 2: No Need to Copy Any Backblaze Link
+## 🏗️ Architecture
 
-❌ Do NOT use:
-
-* Friendly URL
-* S3 URL
-* Native URL
-
-✅ System is already connected via PHP (`get-video.php`)
+User → Moodle LMS → PHP Middleware → Backblaze B2 → Video Streaming
 
 ---
 
-## 🔹 Step 3: Open Moodle
+## 🔥 Key Features
 
-1. Login to Moodle
-2. Go to your **Course**
-3. Turn **Edit mode ON**
-4. Open or Add a **Page/Activity**
-5. Click on **Text Editor**
-
----
-
-## 🔹 Step 4: Open Source Code
-
-1. Click on **“</>” (Source code)** button in editor
+- 🔒 Private bucket storage (no public access)
+- ⏳ Time-limited **signed URLs (token-based authentication)**
+- 🚫 Prevents direct video link sharing
+- ⚡ Scalable architecture (separates compute & storage)
+- 🎯 Secure video streaming inside Moodle
+- 📉 Reduced load on hosting server
 
 ---
 
-## 🔹 Step 5: Paste Video Code
+## 🛠️ Tech Stack
 
-Use this format:
+- Backblaze B2 (S3-compatible cloud storage)
+- PHP (Middleware for secure access)
+- Moodle LMS
+- HTML5 Video Player
+- REST API Integration
+
+---
+
+## ⚙️ How It Works
+
+1. Video is uploaded to a **private Backblaze B2 bucket**
+2. User requests video from Moodle LMS
+3. Request is sent to **PHP middleware (`get-video.php`)**
+4. Middleware generates a **temporary signed URL**
+5. Video is streamed securely using that URL
+
+---
+
+## 📂 Project Structure
+
+```
+
+lms-secure-video-delivery/
+│
+├── backend/
+│   └── get-video.php
+├── docs/
+│   └── setup-guide.md
+├── architecture/
+│   └── architecture-diagram.png
+└── README.md
+
+````
+
+---
+
+## 📹 Video Integration (Moodle)
+
+Example HTML code used in Moodle:
 
 ```html
 <video controls controlsList="nodownload" width="100%">
   <source 
-    src="https://sncyberacademy.com/get-video.php?video=03-routing-basics.mp4"
+    src="https://yourdomain.com/get-video.php?video=sample-video.mp4"
     type="video/mp4">
 </video>
+````
+
+---
+
+## 🔐 Security Implementation
+
+* Videos stored in **private bucket**
+* Access only through **middleware**
+* Signed URLs are:
+
+  * Time-limited
+  * Token-based
+* Prevents unauthorized downloads and sharing
+
+---
+
+## ⚡ Benefits
+
+* Cost-effective cloud storage solution
+* Improved content security
+* Scalable for large number of users
+* Reduced load on application server
+
+---
+
+## 🚀 Future Enhancements
+
+* Add CI/CD pipeline for automated deployment
+* Implement logging and monitoring
+* Integrate CDN for faster global delivery
+* Add role-based access control (RBAC)
+
+---
+
+## 👨‍💻 Author
+
+DevOps Engineer Intern
+Cloud & DevOps Enthusiast
+
+---
+
+## ⭐ Conclusion
+
+This project demonstrates real-world implementation of:
+
+* Cloud storage integration
+* Secure content delivery
+* Middleware-based architecture
+* DevOps thinking for scalability and security
+
 ```
 
 ---
 
-## 🔹 Step 6: Update File Name
-
-👉 Replace only this part:
-
 ```
-03-routing-basics.mp4
-```
-
-with your uploaded file name
-
-Examples:
-
-* `01-Intro.mp4`
-* `02-Network-device.mp4`
-* `04-switching.mp4`
-
----
-
-## 🔹 Step 7: Save & Test
-
-1. Click **Save and display**
-2. Play video
-3. Ensure it loads properly
-
----
-
-## 🔐 Important Notes
-
-* Bucket is **private** 🔒
-* Videos are accessed via **secure PHP link**
-* Link auto-expires after time
-* Do NOT share direct Backblaze links
-
----
-
-## ✅ Summary
-
-* Upload video to Backblaze
-* Copy only **file name**
-* Paste in Moodle code
-* Done 🎉
-
----
-
-## 💡 Example
-
-If uploaded file is:
-
-```
-05-firewall-basics.mp4
-```
-
-Then use:
-
-```html
-<source src="https://sncyberacademy.com/get-video.php?video=05-firewall-basics.mp4">
-```
-
----
