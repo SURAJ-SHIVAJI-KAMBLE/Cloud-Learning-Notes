@@ -11,7 +11,7 @@ This folder contains Azure practical documentation and hands-on labs.
 - [Terraform](./Practicals/Terraform.md)
 - [VM Scale Set Autoscaling](./Practicals/VM%20Scale%20Set%20Autoscaling.md)
 - [Azure AD Lab](./Practicals/azure-ad-lab.md)
-- [Domain Controller (RDP & DNS)](./Practicals/domain-controller.md))
+- [Domain Controller (RDP & DNS)](./Practicals/Domain%20Controller%20RDP%20%26%20DNS%20Troubleshooting.md)
 
 ---
 
