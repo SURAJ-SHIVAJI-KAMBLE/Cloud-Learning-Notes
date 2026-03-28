@@ -1,6 +1,4 @@
----
 
-````md
 # 🚀 GitHub Practical: Upload, Update & Account Switch
 
 ## 🎯 Objective
