@@ -8,7 +8,7 @@
 
 ## ☁️ Azure Labs
 
-- [Application Gateway](./Practicals/Application-gateway.md)
+- [Application Gateway](./Azure/Practicals/Application-gateway.md)
 - [Azure Bastion](./Practicals/Azure-Bastion.md)
 - [Terraform](./Practicals/Terraform.md)
 - [VM Scale Set Autoscaling](./Practicals/VM%20Scale%20Set%20Autoscaling.md)
