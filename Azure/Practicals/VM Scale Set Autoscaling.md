@@ -1,11 +1,11 @@
-# 🚀 Azure VM Scale Set Autoscaling LAB (Step-by-Step)
+#  Azure VM Scale Set Autoscaling LAB (Step-by-Step)
 
-## 📌 Objective
+##  Objective
 Create an Azure VM Scale Set (VMSS), enable autoscaling, generate CPU load, and observe automatic scaling.
 
 ---
 
-## 🧠 Real-World Use Case
+##  Real-World Use Case
 - High traffic → Scale Out (add VMs)
 - Low traffic → Scale In (remove VMs)
 
@@ -13,13 +13,13 @@ Example: Amazon sale vs normal days
 
 ---
 
-## 🛠️ Prerequisites
+##  Prerequisites
 - Azure Free Trial Account
 - Basic knowledge of Azure & Linux
 
 ---
 
-## ⚙️ Step 1: Enable Autoscaling Service
+##  Step 1: Enable Autoscaling Service
 
 Autoscaling requires Microsoft.Insights provider.
 
@@ -60,7 +60,7 @@ Autoscaling requires Microsoft.Insights provider.
 
 ---
 
-## 📊 Step 5: Enable Autoscaling
+##  Step 5: Enable Autoscaling
 
 Select: Autoscaling  
 
@@ -90,7 +90,7 @@ Select: Autoscaling
 
 ---
 
-## 🚀 Step 7: Create VMSS
+##  Step 7: Create VMSS
 
 Click → Review + Create → Create  
 
@@ -126,7 +126,7 @@ Go to VMSS → Instances
 
 ---
 
-## 📊 Step 11: Check CPU Usage
+##  Step 11: Check CPU Usage
 
 ```bash
 top
@@ -138,7 +138,7 @@ Press Ctrl + C
 
 ---
 
-## 🔥 Step 12: Generate CPU Load
+##  Step 12: Generate CPU Load
 
 ### Method 1 (Recommended)
 ```bash
@@ -155,7 +155,7 @@ yes > /dev/null &
 
 ---
 
-## 📊 Step 13: Monitor CPU
+##  Step 13: Monitor CPU
 
 ```bash
 top
@@ -197,13 +197,13 @@ After a few minutes:
 
 ---
 
-## 🧩 Architecture
+##  Architecture
 
 User Load → VMSS → CPU Metrics → Autoscale Rules → Scale In/Out  
 
 ---
 
-## 🎯 Key Learnings
+##  Key Learnings
 
 - VM Scale Set creation  
 - Autoscaling configuration  
